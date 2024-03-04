@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
-
+import Practice from "./PracticePage";
+import { useRouter } from "next/router";
 export default function Home() {
+  const router = useRouter()
   return (
     <>
       <Head>
@@ -37,6 +39,12 @@ export default function Home() {
                 to deploy it.
               </div>
             </Link>
+          <button 
+          type="button"
+          className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+          onClick={() => router.push("/PracticePage")}>
+          test
+          </button>
           </div>
         </div>
       </main>
