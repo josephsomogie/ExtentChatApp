@@ -1,5 +1,5 @@
 import React from 'react';
-export default function TextInput() {
+export default function TextInput(props: any, children: any) {
     return(
         <input
        

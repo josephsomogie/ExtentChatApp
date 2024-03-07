@@ -62,12 +62,55 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    chats         Chat[]
+    conversations Conversation[]
+    friends       User[]   @relation("UserFriends", references: [id])
+    blocked       User[]   @relation("UserBlocked", references: [id])
 }
 
+model Friendship {
+  id        String   @id @default(cuid())
+  userId    String
+  friendId  String
+  user      User    @relation("UserFriends", fields: [userId], references: [id])
+  friend    User    @relation(fields: [friendId], references: [id])
+  @@unique([userId, friendId])
+}
+
+model Block {
+  id        String   @id @default(cuid())
+  blockerId String
+  blockedId String
+  blocker   User    @relation("UserBlocked", fields: [blockerId], references: [id])
+  blocked   User    @relation(fields: [blockedId], references: [id])
+  @@unique([blockerId, blockedId])
+}
 model VerificationToken {
     identifier String
     token      String   @unique
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Chat {
+  id        String    @id @default(cuid())
+  userId    String
+  convoId   String
+  content   String
+  timestamp DateTime  @default(now())
+  saved     Boolean   @default(false)
+  user      User      @relation(fields: [userId], references: [id])
+  conversation Conversation @relation(fields: [convoId], references: [id])
+
+  @@index([userId])
+  @@index([convoId])
+}
+
+model Conversation {
+  id   String  @id @default(cuid())
+  users User[] @relation()
+  chats Chat[]
+
+  @@map("conversations")
 }

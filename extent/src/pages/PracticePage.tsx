@@ -44,7 +44,7 @@ export default function Practice(){
             <center className="pt-5">
    <button 
    className= "w-100 px-4 rounded-lg shadow-sm bg-white"
-   onClick={() => router.back()}
+   onClick={() => router.push('/SignupPage')}
    >
         Log In
    </button>
