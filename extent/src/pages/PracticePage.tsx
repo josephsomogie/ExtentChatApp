@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 export default function Practice(){
     const  [username, setUsername] = useState("")
     const [password, setPassword] = useState(null)
-
     const [errMsg, setErrMsg] = useState(null)
     const [passVis, setPassVis] = useState(null)
   let router = useRouter()

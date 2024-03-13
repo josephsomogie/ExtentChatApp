@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useRouter } from "next/router"
 import Wrapper from "~/components/PurpleWrapper"
 import Button from "~/components/SubmitButton"
+import { Logo } from "~/components/LogoComponent"
 export default function Signup() {
 //useState for signup variables
 const [username, setUsername] = useState('')
@@ -29,6 +30,7 @@ const onSignupClick = () => {
 
     return(
 <Wrapper>
+    <Logo/>
     <p>Test!</p>
     <p
     className="pb-5"
