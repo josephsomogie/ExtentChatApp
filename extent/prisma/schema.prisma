@@ -106,3 +106,8 @@ model Conversation {
 
   @@map("conversations")
 }
+
+model Sample {
+  data String
+  id   String    @id @default(cuid())
+}
