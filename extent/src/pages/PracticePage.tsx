@@ -24,18 +24,22 @@ export default function Practice(){
         });
         const newSample = await response.json();
         console.log("Sample: "+newSample)
-        setSampleData(newSample.data);
+       // setSampleData(newSample.data);
         return newSample;
       };
 
       const fetchSamples = async () => {
-        const response = await fetch('/api/');
-        const samples = await response.json();
-        return samples;
+        const response = await fetch('/api/DBInteractions/getSamples');
+        const data = await response.json();
+        return data;
+
       };
 
       const testFunc = async () => {
-        createSample('Data');
+       // createSample('MY_DATA');
+        const allSamples = await fetchSamples();
+        setSampleData(allSamples[0].data)
+        console.log(allSamples);
         
       }
   

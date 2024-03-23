@@ -12,7 +12,7 @@ export default async function handler(
     try {
       const newSample = await prisma.sample.create({
         data: {
-          data, // Assuming "data" is the name of the field in your request body
+          data, 
         },
       });
       res.status(200).json(newSample);
@@ -23,4 +23,5 @@ export default async function handler(
     res.setHeader('Allow', ['POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
+  
 }
