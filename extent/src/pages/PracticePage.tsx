@@ -14,34 +14,7 @@ export default function Practice(){
         setUsername(event.target.value);
       };
 
-      const createSample = async (sampleData: String, ) => {
-        const response = await fetch('/api/DBInteractions/Test', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ data: sampleData }),
-        });
-        const newSample = await response.json();
-        console.log("Sample: "+newSample)
-       // setSampleData(newSample.data);
-        return newSample;
-      };
-
-      const fetchSamples = async () => {
-        const response = await fetch('/api/DBInteractions/getSamples');
-        const data = await response.json();
-        return data;
-
-      };
-
-      const testFunc = async () => {
-       // createSample('MY_DATA');
-        const allSamples = await fetchSamples();
-        setSampleData(allSamples[4].data)
-        console.log(allSamples);
-        
-      }
+      
   
       
     return(
@@ -87,21 +60,7 @@ export default function Practice(){
         Sign Up
    </button>
    <p className="pt-2"></p>
-   <button 
-   className= "w-100 px-4 rounded-lg shadow-sm bg-white"
-   onClick={testFunc}
-   >
-        Test Data
-   </button>
-   <p className="pt-2"></p>
-   <button 
-   className= "w-100 px-4 rounded-lg shadow-sm bg-white"
-   onClick={testFunc}
-   >
-        Load Data
-   </button>
-   <p className="pt-2"></p>
-   <text>{sampleData}</text>
+   
    </center>
       </div>
      

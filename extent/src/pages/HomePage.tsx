@@ -7,13 +7,17 @@ import { Logo } from "~/components/LogoComponent";
 import { Pfp } from "~/components/PfpComponent";
 import Button from "~/components/SubmitButton";
 
+//this is where we import the api functions to push to the DB
+//view /FrontendApiCalls/pushSample & /FrontendApiCalls/pullSamples for more documentation
 import createSample from "~/FrontendApiCalls/pushSample";
 import getSamples from "~/FrontendApiCalls/pullSamples";
 
 
 
 export default function Home() {
+  //this is our pages router, it allows us to navigate the application via file names.
   const router = useRouter();
+
   // Dummy data for chat lists
   const chats = [
     { id: 1, name: "Chat 1" },
@@ -35,6 +39,9 @@ export default function Home() {
     { id: 17, name: "Chat 2" },
     { id: 18, name: "Chat 3" },
   ];
+
+  //Deprecated dummy data
+  /*
   const messages = [
     {
       messageID: 1,
@@ -57,33 +64,42 @@ export default function Home() {
       date: "5:31",
       content: "You !",
     },
-  ];
-  const [testMessages, setTestMessages] = useState([])
+  ];*/
 
+  //our array of messages
+  const [testMessages, setTestMessages] = useState([])
+//variable and setter function for creating/updating a message draft  in the input field
   const [messageDraft, setMessageDraft] = useState(String)
+  //this is just an example userID for now. It will be replaced with the actual logged in userID 
   const [userTest, setUserTest] = useState('1')
+
+  //This function updates the messageDraft variable to whatever the current value of the message input field is.
   const handleMessageDraft = (event: any) => {
     setMessageDraft(event.target.value)
   }
 
 
-
+//this function pushes a message in the chat into the DB
 const sendMessage = async () => {
   setUserTest("2");
   await createSample(messageDraft,userTest);
- // loadMessages();
+  loadMessages();
   
 }
+//this function  is used to get all the messages from the database
 const loadMessages = async () => {
   setTestMessages(await getSamples())
 
 }
 useEffect(() => {
-  loadMessages(); // Load messages when the component mounts
+  loadMessages(); // Load messages when the component mounts (page is loaded for the first time)
 }, []); // Empty dependency array ensures this effect runs only once on mount
   // State to keep track of the selected chat
+
+  //This is a variable and its setter function to to set which conversation is selected 
   const [selectedChat, setSelectedChat] = useState(String);
 
+  //This is where we return the JSX (react HTML)  that makes up our page. the useState variables will re-render the page if they change.
   return (
     <Wrapper>
       <div className="items-top ">

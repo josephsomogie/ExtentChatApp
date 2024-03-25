@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+//This function makes a http post request to an api file on our backend to create an instance of the sample model.
+//see the api file at '/api/DBInteractions/createSamples'
 export default  async function createSample(sampleData:String, sampleUserID:String){
   
     try {
