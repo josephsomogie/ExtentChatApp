@@ -110,4 +110,5 @@ model Conversation {
 model Sample {
   data String
   id   String    @id @default(cuid())
+  userID String
 }

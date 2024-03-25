@@ -14,7 +14,7 @@ export default function Practice(){
         setUsername(event.target.value);
       };
 
-      const createSample = async (sampleData: String) => {
+      const createSample = async (sampleData: String, ) => {
         const response = await fetch('/api/DBInteractions/Test', {
           method: 'POST',
           headers: {
@@ -38,7 +38,7 @@ export default function Practice(){
       const testFunc = async () => {
        // createSample('MY_DATA');
         const allSamples = await fetchSamples();
-        setSampleData(allSamples[0].data)
+        setSampleData(allSamples[4].data)
         console.log(allSamples);
         
       }
