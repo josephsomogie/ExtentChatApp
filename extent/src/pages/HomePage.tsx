@@ -131,8 +131,8 @@ useEffect(() => {
 
           {/* Chat display section */}
 
-          <div className="items-top flex  w-2/3 pl-8 pt-1">
-            <div className=" parent-div  h-full w-full items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
+          <div className="items-top flex  w-2/3 pl-8 pt-1 ">
+            <div className=" parent-div  h-screen w-full items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
               <h2>{selectedChat}</h2>
               {testMessages.length === 0 ? (<p>Loading...</p>) : testMessages.map((message, index) => (
                 <div
