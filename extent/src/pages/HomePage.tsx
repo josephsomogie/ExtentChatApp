@@ -102,7 +102,7 @@ useEffect(() => {
   //This is where we return the JSX (react HTML)  that makes up our page. the useState variables will re-render the page if they change.
   return (
     <Wrapper>
-      <div className="items-top ">
+      <div className="items-top h-screen ">
         <h1>
           <div className="flex justify-center rounded-md bg-gray-500 pb-4 pt-4">
             <button
@@ -127,9 +127,10 @@ useEffect(() => {
             </button>
           </div>
         </h1>
-        <div className="items-top flex h-full pt-4   ">
+
+        <div className="items-top flex h-5/6 pt-4   ">
           {/* Chat list column */}
-          <div className=" ml-4 h-screen w-1/5 items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
+          <div className=" ml-4 h-auto  w-1/5 items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
             <text>Chat List</text>
             {chats.map((chat) => (
               <div>
@@ -148,7 +149,7 @@ useEffect(() => {
           {/* Chat display section */}
 
           <div className="items-top flex  w-2/3 pl-8 pt-1 ">
-            <div className=" parent-div  h-screen w-full items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
+            <div className=" parent-div  h-full w-full items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
               <h2>{selectedChat}</h2>
               {testMessages.length === 0 ? (<p>Loading...</p>) : testMessages.map((message, index) => (
                 <div

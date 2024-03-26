@@ -35,13 +35,14 @@ export default function Practice(){
         <input
         type = "text"
         onChange ={handleInputChange}
-        defaultValue={"Username"}
-        className="w-100 px-4 py-2 text-lg placeholder-gray-500 bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        className="w-100 px-4 py-2 text-lg placeholder-white bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        placeholder='Username'
         />
         <p className='pt-5'></p>
         <input
         type = "password"
-        className="w-100 px-4 py-2 text-lg placeholder-gray-500 bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        className="w-100 px-4 py-2 text-lg placeholder-white bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        placeholder="Password"
         />
         </center>
       
@@ -52,7 +53,7 @@ export default function Practice(){
    >
         Log In
    </button>
-      <p className="pt-2"></p>
+      <p className="pt-2 pb-2"></p>
    <button 
    className= "w-100 px-4 rounded-lg shadow-sm bg-white"
    onClick={() => router.push('/SignupPage')}
