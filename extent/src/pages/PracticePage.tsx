@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import TextInput from "~/components/TextInput"
 import Image from "next/image"
 import { useRouter } from "next/router"
-
+import Wrapper from "~/components/PurpleWrapper"
+import {Logo, LightLogo, DarkLogo, AutoLogo} from "~/components/LogoComponent"
 export default function Practice(){ 
     const  [username, setUsername] = useState("")
     const [password, setPassword] = useState(null)
@@ -19,14 +20,10 @@ export default function Practice(){
       
     return(
     
-  
-      <div
-      className="bg-violet-950 min-h-screen"
-      >
+  <Wrapper>
+      
         <center className="pb-10 pt-10">
-        <Image src="/images/Logo.png" alt="Extent Logo" width="200" height="200">
-          
-        </Image>
+        <AutoLogo/>
         </center>
         <center>
         
@@ -35,17 +32,17 @@ export default function Practice(){
         <input
         type = "text"
         onChange ={handleInputChange}
-        className="w-100 px-4 py-2 text-lg placeholder-white bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        className="input-1"
         placeholder='Username'
         />
         <p className='pt-5'></p>
         <input
         type = "password"
-        className="w-100 px-4 py-2 text-lg placeholder-white bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        className="input-1"
         placeholder="Password"
         />
         </center>
-      
+
             <center className="pt-5">
    <button 
    className= "w-100 px-4 rounded-lg shadow-sm bg-white"
@@ -63,7 +60,7 @@ export default function Practice(){
    <p className="pt-2"></p>
    
    </center>
-      </div>
-     
+      
+      </Wrapper>
     )
 }

@@ -70,6 +70,7 @@ export default function Home() {
   const [testMessages, setTestMessages] = useState([])
 //variable and setter function for creating/updating a message draft  in the input field
   const [messageDraft, setMessageDraft] = useState(String)
+  const messageClear = "";
   //this is just an example userID for now. It will be replaced with the actual logged in userID 
   const [userTest, setUserTest] = useState('1')
 
@@ -83,6 +84,7 @@ export default function Home() {
 const sendMessage = async () => {
   setUserTest("2");
   await createSample(messageDraft,userTest);
+  
   loadMessages();
   
 }
@@ -99,12 +101,27 @@ useEffect(() => {
   //This is a variable and its setter function to to set which conversation is selected 
   const [selectedChat, setSelectedChat] = useState(String);
 
+  // State to manage whether dark mode is enabled
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Effect to apply the dark mode class to the body
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  // Toggle the dark mode state
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+
   //This is where we return the JSX (react HTML)  that makes up our page. the useState variables will re-render the page if they change.
   return (
     <Wrapper>
       <div className="items-top h-screen ">
         <h1>
-          <div className="flex justify-center rounded-md bg-gray-500 pb-4 pt-4">
+          <div className="homepage-header">
             <button
               className="rounded-md bg-white pl-2 pr-2"
               onClick={() => router.replace("/PracticePage")}
@@ -121,7 +138,7 @@ useEffect(() => {
             <p className="pl-10"></p>
             <button
               className="rounded-md bg-white pl-2 pr-2"
-              onClick={loadMessages}
+              onClick={toggleDarkMode}
             >
               <text>My Account</text>
             </button>
@@ -130,7 +147,7 @@ useEffect(() => {
 
         <div className="items-top flex h-5/6 pt-4   ">
           {/* Chat list column */}
-          <div className=" ml-4 h-auto  w-1/5 items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
+          <div className="chatlist">
             <text>Chat List</text>
             {chats.map((chat) => (
               <div>
@@ -149,7 +166,7 @@ useEffect(() => {
           {/* Chat display section */}
 
           <div className="items-top flex  w-2/3 pl-8 pt-1 ">
-            <div className=" parent-div  h-full w-full items-center overflow-y-auto rounded-lg bg-gray-500 p-2 ">
+            <div className="chatwindow">
               <h2>{selectedChat}</h2>
               {testMessages.length === 0 ? (<p>Loading...</p>) : testMessages.map((message, index) => (
                 <div
@@ -168,7 +185,7 @@ useEffect(() => {
                       className={
                         message.userID !== '1'
                           ? " w-auto rounded-lg bg-white text-center"
-                          : " w-auto rounded-lg bg-blue-500 text-center"
+                          : " w-auto rounded-lg bg-blue-900 text-center"
                       }
                     >
                       {message.userID !== '1' ? (
@@ -192,7 +209,7 @@ useEffect(() => {
         </div>
         <div className="items-top pb-2 pt-2 w-auto">
           <input className="min-w-20 w-auto bg-white"
-          value={messageDraft}
+         // value={}
           onChange={handleMessageDraft} 
           >
 
