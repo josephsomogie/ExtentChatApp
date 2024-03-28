@@ -1,8 +1,14 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import Wrapper from "~/components/PurpleWrapper"
 import Button from "~/components/SubmitButton"
 import { Logo, LightLogo, DarkLogo, AutoLogo } from "~/components/LogoComponent"
+import { type GetServerSideProps, NextPage } from "next";
+import getSession from "~/FrontendApiCalls/pullSession"
+import { getServerAuthSession } from "~/server/auth"
+import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
+import { any } from "zod"
 export default function Signup() {
 //useState for signup variables
 const [username, setUsername] = useState('')
@@ -31,6 +37,25 @@ const onSignupClick = () => {
     }
 }
 
+
+const [session, setSession] = useState<string | undefined>(undefined);
+const findSession = async () =>{
+ /* try{
+  const sessionData = await getSession();
+  setSession(sessionData.id);
+  console.log("Success: "+sessionData)
+  } catch(e){
+    console.log("Session Error: "+e);
+  }*/
+  setSession(session_test?.user.id)
+}
+useEffect(() =>{
+ findSession(),
+  []
+})
+//THIS IS ALL WE NEEDED THIS WHOLE TIME SHOOT ME
+const { data: session_test } = useSession();
+//http://localhost:3000/api/auth/signin
     return(
 <Wrapper>
     <p className ="pt-5"></p>
@@ -77,13 +102,13 @@ const onSignupClick = () => {
     ></input>
     </p>
     </div>
-
+     <p>{session ? session : "no session"}</p>
     <p>{errVis? errMsg: null}</p>
     <p>{username}</p>
     <p>{email}</p>
     <button
         className="w-100 px-4 rounded-lg shadow-sm bg-white"
-        onClick={onSignupClick}
+        onClick={findSession}
         
         >
           <text>Sign Up</text>
@@ -99,3 +124,10 @@ const onSignupClick = () => {
 </Wrapper>
     );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
+  const session = await getServerAuthSession(ctx);
+  return{
+    props: {session},
+  };
+};

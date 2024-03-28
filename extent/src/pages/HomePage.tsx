@@ -12,7 +12,7 @@ import Button from "~/components/SubmitButton";
 import createSample from "~/FrontendApiCalls/pushSample";
 import getSamples from "~/FrontendApiCalls/pullSamples";
 
-
+import { getServerAuthSession } from "~/server/auth";
 
 export default function Home() {
   //this is our pages router, it allows us to navigate the application via file names.
@@ -78,7 +78,6 @@ export default function Home() {
   const handleMessageDraft = (event: any) => {
     setMessageDraft(event.target.value)
   }
-
 
 //this function pushes a message in the chat into the DB
 const sendMessage = async () => {

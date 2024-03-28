@@ -4,7 +4,10 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import Wrapper from "~/components/PurpleWrapper"
 import {Logo, LightLogo, DarkLogo, AutoLogo} from "~/components/LogoComponent"
-export default function Practice(){ 
+import { getServerAuthSession } from "~/server/auth"
+
+export default  function Practice(){ 
+  
     const  [username, setUsername] = useState("")
     const [password, setPassword] = useState(null)
     const [errMsg, setErrMsg] = useState(null)
