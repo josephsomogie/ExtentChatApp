@@ -7,7 +7,7 @@ import { type GetServerSideProps, NextPage } from "next";
 import getSession from "~/FrontendApiCalls/pullSession"
 import { getServerAuthSession } from "~/server/auth"
 import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { any } from "zod"
 export default function Signup() {
 //useState for signup variables
@@ -112,6 +112,13 @@ const { data: session_test } = useSession();
         
         >
           <text>Sign Up</text>
+        </button>
+        <p className = 'pt-2 pb-2 '></p>
+        <button 
+        className="w-100 px-4 rounded-lg shadow-sm bg-white"
+        onClick={() => {signIn('google', {callbackUrl:'http://localhost:3000/HomePage'})}}
+        >
+          <text>CLICK ME</text>
         </button>
       <p className = 'pt-2 pb-2 '></p>
         <button
