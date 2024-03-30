@@ -15,14 +15,18 @@ import getSamples from "~/FrontendApiCalls/pullSamples";
 import { getServerAuthSession } from "~/server/auth";
 import { signOut, useSession } from "next-auth/react";
 
+import ChatWindow from "~/components/ChatWindow";
+import ChatList from "~/components/ChatList";
+
+import toggleDarkMode from "~/ClientFunctions/DarkmodeToggle";
 export default function HomeP() {
   const { data: session } = useSession();
 
-   //this is our pages router, it allows us to navigate the application via file names.
-   const router = useRouter();
+  //this is our pages router, it allows us to navigate the application via file names.
+  const router = useRouter();
 
- 
-
+   //This is a variable and its setter function to to set which conversation is selected
+   const [selectedChat, setSelectedChat] = useState(String);
   // Dummy data for chat lists
   const chats = [
     { id: 1, name: "Chat 1" },
@@ -45,167 +49,98 @@ export default function HomeP() {
     { id: 18, name: "Chat 3" },
   ];
 
-  
   //our array of messages
-  const [testMessages, setTestMessages] = useState([])
-//variable and setter function for creating/updating a message draft  in the input field
-  const [messageDraft, setMessageDraft] = useState(String)
+  const [testMessages, setTestMessages] = useState([]);
+  //variable and setter function for creating/updating a message draft  in the input field
+  const [messageDraft, setMessageDraft] = useState(String);
   const messageClear = "";
-  //this is just an example userID for now. It will be replaced with the actual logged in userID 
-  const [userTest, setUserTest] = useState('1')
+  //this is just an example userID for now. It will be replaced with the actual logged in userID
+  const [userTest, setUserTest] = useState("1");
 
   //This function updates the messageDraft variable to whatever the current value of the message input field is.
   const handleMessageDraft = (event: any) => {
-    setMessageDraft(event.target.value)
-  }
+    setMessageDraft(event.target.value);
+  };
 
-//this function pushes a message in the chat into the DB
-const sendMessage = async () => {
-  setUserTest("2");
-  await createSample(messageDraft,userTest);
-  
-  loadMessages();
-  
-}
-//this function  is used to get all the messages from the database
-const loadMessages = async () => {
-  setTestMessages(await getSamples())
+  //this function pushes a message in the chat into the DB
+  const sendMessage = async () => {
+    setUserTest("2");
+    await createSample(messageDraft, userTest);
 
-}
-useEffect(() => {
-  loadMessages(); // Load messages when the component mounts (page is loaded for the first time)
-}, []); // Empty dependency array ensures this effect runs only once on mount
+    loadMessages();
+  };
+  //this function  is used to get all the messages from the database
+  const loadMessages = async () => {
+    setTestMessages(await getSamples());
+  };
+  useEffect(() => {
+    loadMessages(); // Load messages when the component mounts (page is loaded for the first time)
+  }, []); // Empty dependency array ensures this effect runs only once on mount
   // State to keep track of the selected chat
 
-  //This is a variable and its setter function to to set which conversation is selected 
-  const [selectedChat, setSelectedChat] = useState(String);
+ 
 
-  // State to manage whether dark mode is enabled
-  const [darkMode, setDarkMode] = useState(true);
-
-  // Effect to apply the dark mode class to the body
+//Dark Mode toggle effect
+  const [darkMode, setDarkMode] = useState(true)
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  // Toggle the dark mode state
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+    toggleDarkMode(darkMode);
+  }, [darkMode])
 
   //This is where we return the JSX (react HTML)  that makes up our page. the useState variables will re-render the page if they change.
-   
+
   return (
-    
     <Wrapper>
       <div className="items-top h-screen ">
         <h1>
           <div className="homepage-header">
             <button
               className="rounded-md bg-white pl-2 pr-2"
-              onClick={ () => signOut({ callbackUrl: 'http://localhost:3000' })}
+              onClick={() => signOut({ callbackUrl: "http://localhost:3000" })}
             >
               <text>Sign Out</text>
             </button>
             <p className="pl-10"></p>
             <button
               className="rounded-md bg-white pl-2 pr-2"
-              onClick={toggleDarkMode}
+              onClick={() => setDarkMode(!darkMode)}
             >
-              <text>{!darkMode? "Dark Mode" : "Light Mode"}</text>
+              <text>{!darkMode ? "Dark Mode" : "Light Mode"}</text>
             </button>
             <p className="pl-10"></p>
-            <button
-              className="rounded-md bg-white pl-2 pr-2"
-              
-            >
+            <button className="rounded-md bg-white pl-2 pr-2">
               <text>My Account</text>
             </button>
           </div>
         </h1>
 
         <div className="items-top flex h-5/6 pt-4   ">
-          {/* Chat list column */}
-          <div className="chatlist">
-            <text>Chat List</text>
-            {chats.map((chat) => (
-              <div>
-                <div
-                  key={chat.id}
-                  onClick={() => setSelectedChat(chat.name)}
-                  className="mb-2 cursor-pointer rounded-full bg-blue-500 px-4 py-2"
-                >
-                  {chat.name}
-                </div>
-                <p className="pb-1"></p>
-              </div>
-            ))}
-          </div>
-
-          {/* Chat display section */}
-
+          <ChatList 
+            chats={chats} 
+            setSelectedChat={setSelectedChat} 
+            />
           <div className="items-top flex  w-2/3 pl-8 pt-1 ">
-            <div className="chatwindow">
-              <h2>{selectedChat}</h2>
-              {testMessages.length === 0 ? (<p>Loading...</p>) : testMessages.map((message, index) => (
-                <div
-                  className={
-                    message.userID === '1'
-                      ? "flex justify-end"
-                      : "flex justify-start"
-                  }
-                  key={index}
-                >
-                  <div>
-                    <text className="text-left text-sm ">
-                      {message.userID} said:
-                    </text>
-                    <div
-                      className={
-                        message.userID !== '1'
-                          ? " w-auto rounded-lg bg-white text-center"
-                          : " w-auto rounded-lg bg-blue-900 text-center"
-                      }
-                    >
-                      {message.userID !== '1' ? (
-                        <div className="flex items-center">
-                          <Pfp />
-                          <text className="text-2xl p-1">{message.data}</text>
-                        </div>
-                      ) : (
-                        <div className="flex items-center">
-                          <text className="text-2xl p-1">{message.data}</text>
-                          <Pfp />
-                        </div>
-                      )}
-                    </div>
-                    {/*<text className="text-left text-sm">at {message.date}</text>*/}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <ChatWindow
+              selectedChat={selectedChat}
+              testMessages={testMessages}
+            />
           </div>
         </div>
-        <div className="items-top pb-2 pt-2 w-auto">
-          <input className="min-w-20 w-auto bg-white"
-         // value={}
-          onChange={handleMessageDraft} 
-          >
+        <div className="items-top w-auto pb-2 pt-2">
+          <input
+            className="input-message"
+            value={messageDraft}
+            onChange={handleMessageDraft}
+          ></input>
 
-          </input>
-         
-          <button onClick={sendMessage}
-          disabled={false}
-          className="w-100 px-4 rounded-lg shadow-sm bg-white ml-2">
+          <button
+            onClick={sendMessage}
+            disabled={false}
+            className="w-100 ml-2 rounded-lg bg-white px-4 shadow-sm"
+          >
             <text>send</text>
           </button>
         </div>
       </div>
     </Wrapper>
-                      
   );
-                                        
-
 }
