@@ -1,3 +1,6 @@
+//Joseph Somogie 2024
+//Reusable list component for our conversation navigation.
+//props/params: chats -- an array of chat objects | setSelectedChat -- a function passed in to control an external state variable
 import React from 'react';
 
 interface Chat {

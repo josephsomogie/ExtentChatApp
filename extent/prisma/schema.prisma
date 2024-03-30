@@ -101,6 +101,7 @@ model Chat {
 
 model Conversation {
   id   String  @id @default(cuid())
+  name String? 
   users User[] @relation()
   chats Chat[]
 
