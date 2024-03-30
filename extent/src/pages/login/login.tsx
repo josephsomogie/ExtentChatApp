@@ -1,12 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import TextInput from "~/components/TextInput"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import Wrapper from "~/components/PurpleWrapper"
 import {Logo, LightLogo, DarkLogo, AutoLogo} from "~/components/LogoComponent"
 import { getServerAuthSession } from "~/server/auth"
-
-export default  function Practice(){ 
+import toggleDarkMode from "~/ClientFunctions/DarkmodeToggle"
+import { signIn } from "next-auth/react"
+export default  function LogIn(){ 
   
     const  [username, setUsername] = useState("")
     const [password, setPassword] = useState(null)
@@ -17,8 +18,9 @@ export default  function Practice(){
     const handleInputChange = (event: any) => {
         setUsername(event.target.value);
       };
-
-      
+useEffect( ()=>{
+      toggleDarkMode(true);
+} ,[])
   
       
     return(
@@ -28,35 +30,18 @@ export default  function Practice(){
         <center className="pb-10 pt-10">
         <AutoLogo/>
         </center>
-        <center>
-        
-        </center>
-        <center>
-        <input
-        type = "text"
-        onChange ={handleInputChange}
-        className="input-1"
-        placeholder='Username'
-        />
-        <p className='pt-5'></p>
-        <input
-        type = "password"
-        className="input-1"
-        placeholder="Password"
-        />
-        </center>
 
             <center className="pt-5">
    <button 
    className= "w-100 px-4 rounded-lg shadow-sm bg-white"
-   onClick={() => router.push('/HomePage')}
+   onClick={() => {signIn('google', {callbackUrl:'http://localhost:3000'})}}
    >
-        Log In
+        Log In With Google
    </button>
       <p className="pt-2 pb-2"></p>
    <button 
    className= "w-100 px-4 rounded-lg shadow-sm bg-white"
-   onClick={() => router.push('/SignupPage')}
+   onClick={() => router.push('/signup')}
    >
         Sign Up
    </button>

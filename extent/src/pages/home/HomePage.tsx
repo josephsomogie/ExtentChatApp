@@ -13,10 +13,15 @@ import createSample from "~/FrontendApiCalls/pushSample";
 import getSamples from "~/FrontendApiCalls/pullSamples";
 
 import { getServerAuthSession } from "~/server/auth";
+import { signOut, useSession } from "next-auth/react";
 
-export default function Home() {
-  //this is our pages router, it allows us to navigate the application via file names.
-  const router = useRouter();
+export default function HomeP() {
+  const { data: session } = useSession();
+
+   //this is our pages router, it allows us to navigate the application via file names.
+   const router = useRouter();
+
+ 
 
   // Dummy data for chat lists
   const chats = [
@@ -40,32 +45,7 @@ export default function Home() {
     { id: 18, name: "Chat 3" },
   ];
 
-  //Deprecated dummy data
-  /*
-  const messages = [
-    {
-      messageID: 1,
-      userId: 1,
-      username: "testUser",
-      date: "5:30",
-      content: "You SMELL!",
-    },
-    {
-      messageID: 2,
-      userId: 2,
-      username: "testUser",
-      date: "5:31",
-      content: "Hello world!",
-    },
-    {
-      messageID: 3,
-      userId: 1,
-      username: "testUser",
-      date: "5:31",
-      content: "You !",
-    },
-  ];*/
-
+  
   //our array of messages
   const [testMessages, setTestMessages] = useState([])
 //variable and setter function for creating/updating a message draft  in the input field
@@ -101,7 +81,7 @@ useEffect(() => {
   const [selectedChat, setSelectedChat] = useState(String);
 
   // State to manage whether dark mode is enabled
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   // Effect to apply the dark mode class to the body
   useEffect(() => {
@@ -116,28 +96,30 @@ useEffect(() => {
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   //This is where we return the JSX (react HTML)  that makes up our page. the useState variables will re-render the page if they change.
+   
   return (
+    
     <Wrapper>
       <div className="items-top h-screen ">
         <h1>
           <div className="homepage-header">
             <button
               className="rounded-md bg-white pl-2 pr-2"
-              onClick={() => router.replace("/PracticePage")}
+              onClick={ () => signOut({ callbackUrl: 'http://localhost:3000' })}
             >
               <text>Sign Out</text>
             </button>
             <p className="pl-10"></p>
             <button
               className="rounded-md bg-white pl-2 pr-2"
-              onClick={() => router.replace("/PracticePage")}
+              onClick={toggleDarkMode}
             >
-              <text>Settings</text>
+              <text>{!darkMode? "Dark Mode" : "Light Mode"}</text>
             </button>
             <p className="pl-10"></p>
             <button
               className="rounded-md bg-white pl-2 pr-2"
-              onClick={toggleDarkMode}
+              
             >
               <text>My Account</text>
             </button>
@@ -177,7 +159,7 @@ useEffect(() => {
                   key={index}
                 >
                   <div>
-                    <text className="text-left text-sm">
+                    <text className="text-left text-sm ">
                       {message.userID} said:
                     </text>
                     <div
@@ -190,11 +172,11 @@ useEffect(() => {
                       {message.userID !== '1' ? (
                         <div className="flex items-center">
                           <Pfp />
-                          <text className="text-2xl pl-1 pr-1">{message.data}</text>
+                          <text className="text-2xl p-1">{message.data}</text>
                         </div>
                       ) : (
                         <div className="flex items-center">
-                          <text className="text-2xl pl-1 pr-1">{message.data}</text>
+                          <text className="text-2xl p-1">{message.data}</text>
                           <Pfp />
                         </div>
                       )}
@@ -222,5 +204,8 @@ useEffect(() => {
         </div>
       </div>
     </Wrapper>
+                      
   );
+                                        
+
 }

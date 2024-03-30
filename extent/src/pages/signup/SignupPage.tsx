@@ -3,12 +3,8 @@ import { useRouter } from "next/router"
 import Wrapper from "~/components/PurpleWrapper"
 import Button from "~/components/SubmitButton"
 import { Logo, LightLogo, DarkLogo, AutoLogo } from "~/components/LogoComponent"
-import { type GetServerSideProps, NextPage } from "next";
-import getSession from "~/FrontendApiCalls/pullSession"
-import { getServerAuthSession } from "~/server/auth"
 import { Session } from "next-auth";
 import { useSession, signIn } from "next-auth/react";
-import { any } from "zod"
 export default function Signup() {
 //useState for signup variables
 const [username, setUsername] = useState('')
@@ -40,13 +36,7 @@ const onSignupClick = () => {
 
 const [session, setSession] = useState<string | undefined>(undefined);
 const findSession = async () =>{
- /* try{
-  const sessionData = await getSession();
-  setSession(sessionData.id);
-  console.log("Success: "+sessionData)
-  } catch(e){
-    console.log("Session Error: "+e);
-  }*/
+
   setSession(session_test?.user.id)
 }
 useEffect(() =>{
@@ -102,39 +92,27 @@ const { data: session_test } = useSession();
     ></input>
     </p>
     </div>
-     <p>{session ? session : "no session"}</p>
     <p>{errVis? errMsg: null}</p>
     <p>{username}</p>
     <p>{email}</p>
     <button
         className="w-100 px-4 rounded-lg shadow-sm bg-white"
-        onClick={findSession}
+        
         
         >
-          <text>Sign Up</text>
+          <text>Create Account</text>
         </button>
         <p className = 'pt-2 pb-2 '></p>
-        <button 
-        className="w-100 px-4 rounded-lg shadow-sm bg-white"
-        onClick={() => {signIn('google', {callbackUrl:'http://localhost:3000/HomePage'})}}
-        >
-          <text>CLICK ME</text>
-        </button>
+      
       <p className = 'pt-2 pb-2 '></p>
         <button
         className="w-100 px-4 rounded-lg shadow-sm bg-white"
-        onClick={ () =>router.replace('/PracticePage')}
+        onClick={ () =>router.replace('/login')}
         
         >
-          <text>Log In</text>
+          <text> Log In </text>
         </button>
 </Wrapper>
     );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
-  const session = await getServerAuthSession(ctx);
-  return{
-    props: {session},
-  };
-};
