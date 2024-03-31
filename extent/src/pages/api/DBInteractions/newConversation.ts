@@ -2,10 +2,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '~/server/db';
 
 
-async function createUserConversation(name: string, users: string[]) {
+async function createUserConversation(name: string, users: string[], creator: string) {
   await db.conversation.create({
       data: {
           name: name,
+          creatorId: creator,
           users: {
               connect: users.map(userId => ({ id: userId })),
           },
@@ -21,11 +22,11 @@ export default async function handler(
    
     if(req.method === 'POST'){
         try{
-        const { name, users } = req.body;
+        const { name, users, creator } = req.body;
         if (!name || !users || !Array.isArray(users)) {
             return res.status(400).json({ message: 'Missing or invalid name and/or users in request body' });
         }
-        await createUserConversation(name, users);
+        await createUserConversation(name, users, creator);
         res.status(201).json({ message: 'Conversation created successfully' });
 
         }catch(error){

@@ -22,9 +22,9 @@ export default  async function createSample(sampleData:String, sampleUserID:Stri
   
       const newSample = await response.json();
       console.log('New sample created:', newSample);
-      // Do something with the newSample if needed
+      
     } catch (error) {
       console.error('Error creating sample:', error);
-      // Handle error appropriately
+      
     }
   };
