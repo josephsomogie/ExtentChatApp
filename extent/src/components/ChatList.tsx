@@ -11,11 +11,16 @@ interface Chat {
   interface ChatListProps {
     chats: Chat[];
     setSelectedChat: (name: string) => void;
+    newChatFunc: (convoId: string, userId: string, content: string) => void;
   }
-export default function ChatList({chats, setSelectedChat}: ChatListProps){
+export default function ChatList({chats, setSelectedChat, newChatFunc}: ChatListProps){
     return(
+      
 <div className="chatlist">
+
             <text>Chat List</text>
+      
+           
             {chats.map((chat) => (
               <div>
                 <div
@@ -28,6 +33,8 @@ export default function ChatList({chats, setSelectedChat}: ChatListProps){
                 <p className="pb-1"></p>
               </div>
             ))}
+            
           </div>
+          
     )
 }

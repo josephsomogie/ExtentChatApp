@@ -11,6 +11,7 @@ async function getUserConversations(userId: string) {
         include: {
           users: true,
           chats: true,
+
         },
       },
     },

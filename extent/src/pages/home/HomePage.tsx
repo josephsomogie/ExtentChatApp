@@ -19,6 +19,13 @@ import ChatWindow from "~/components/ChatWindow";
 import ChatList from "~/components/ChatList";
 
 import toggleDarkMode from "~/ClientFunctions/DarkmodeToggle";
+
+import pushConversations from "~/FrontendApiCalls/pushConversation";
+import pullConversations from "~/FrontendApiCalls/pullConversations";
+import pushChat from "~/FrontendApiCalls/pushChat";
+
+import { User, Conversation, Chat } from "~/ClientFunctions/interfaces";
+
 export default function HomeP() {
   const { data: session } = useSession();
 
@@ -48,6 +55,27 @@ export default function HomeP() {
     { id: 17, name: "Chat 2" },
     { id: 18, name: "Chat 3" },
   ];
+  const userArray = [
+    "clua7m4oz0000ite2b3xy6t14",
+    "clubq7ddx0000ptnk3kztny88"
+  ]
+const pushConvo = async () => {
+  await pushConversations("test Conversation",userArray,"clua7m4oz0000ite2b3xy6t14");
+}
+
+const [convos, setConvos] = useState<Conversation[]>([]);
+const pullConvos = async () => {
+const conversation_test:Conversation[] =  await pullConversations('clua7m4oz0000ite2b3xy6t14');
+setConvos(conversation_test);
+}
+const [currentConvo, setCurrentConvo] = useState(String)
+const createMessage = async () => {
+  if(convos[0]!==undefined ){
+await pushChat(convos[0].id,'clua7m4oz0000ite2b3xy6t14', 'test chat', )
+}else console.log("error creating test message")
+}
+
+
 
   //our array of messages
   const [testMessages, setTestMessages] = useState([]);
@@ -100,6 +128,7 @@ export default function HomeP() {
               <text>Sign Out</text>
             </button>
             <p className="pl-10"></p>
+            
             <button
               className="rounded-md bg-white pl-2 pr-2"
               onClick={() => setDarkMode(!darkMode)}
@@ -112,12 +141,15 @@ export default function HomeP() {
             </button>
           </div>
         </h1>
-
+       
         <div className="items-top flex h-5/6 pt-4   ">
+         
+           
           <ChatList 
             chats={chats} 
             setSelectedChat={setSelectedChat} 
             />
+            
           <div className="items-top flex  w-2/3 pl-8 pt-1 ">
             <ChatWindow
               selectedChat={selectedChat}

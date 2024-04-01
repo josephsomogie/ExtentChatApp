@@ -26,6 +26,7 @@ const ChatWindow = ( {selectedChat, testMessages}:ChatWindowProps ) => {
               {testMessages.length === 0 ? (<p>Loading...</p>) : testMessages.map((message, index) => (
                 <div
                   className={
+                    
                     message.userID === '1'
                       ? "flex justify-end"
                       : "flex justify-start"
