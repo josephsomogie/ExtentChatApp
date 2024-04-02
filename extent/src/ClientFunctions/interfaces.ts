@@ -1,6 +1,7 @@
 export interface User {
     id: string;
     name: string;
+    image: string | null;
   }
   
   export interface Chat {

@@ -23,7 +23,7 @@ export default async function handler(
     if(req.method === 'POST'){
         try{
         const { name, users, creator } = req.body;
-        if (!name || !users || !Array.isArray(users)) {
+        if (!name || !users /*|| !Array.isArray(users)*/) {
             return res.status(400).json({ message: 'Missing or invalid name and/or users in request body' });
         }
         await createUserConversation(name, users, creator);

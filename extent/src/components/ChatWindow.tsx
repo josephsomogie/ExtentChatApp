@@ -45,13 +45,13 @@ const ChatWindow = ( {selectedChat, testMessages}:ChatWindowProps ) => {
                       }
                     >
                       {message.userID !== '1' ? (
-                        <div className="flex items-center">
+                        <div className="flex items-center text-wrap">
                           {/*<Pfp />*/}
-                          <text className="text-2xl p-1">{message.data}</text>
+                          <text className="text-2xl p-2 break-words max-w-xl">{message.data}</text>
                         </div>
                       ) : (
-                        <div className="flex items-center">
-                          <text className="text-2xl p-1">{message.data}</text>
+                        <div className="flex items-center text-wrap">
+                          <text className="text-2xl p-2 break-words max-w-xl">{message.data}</text>
                           {/*<Pfp />*/}
                         </div>
                       )}

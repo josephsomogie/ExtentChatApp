@@ -1,18 +1,19 @@
 export default async function pushConversations(conversationName: string, userID: string[], creator: string) {
    
-    if (typeof conversationName !== 'string' || !Array.isArray(userID)) {
+    if (typeof conversationName !== 'string' /*|| !Array.isArray(userID)*/) {
         console.error('Invalid input for conversationName or userID');
         return; 
     }
 try{
-    const response = await fetch('/api/DBInteractions/newConversations', {
+    const response = await fetch('/api/DBInteractions/newConversation', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             name: conversationName,
-            users: userID
+            users: userID,
+            creator: creator
         })
     });
     if (!response.ok) {
