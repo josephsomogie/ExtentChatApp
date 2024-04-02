@@ -1,7 +1,14 @@
-import Home from "..";
-import HomePage from "./help";
+
+import HomePage from "../../components/HomeComponent";
+import { useSession } from "next-auth/react";
+import LogIn from "../login/login";
 export default function homePage() {
-    return(
-        <HomePage/>
-    );
+    const {data: session} = useSession();
+    if(session){
+    return <HomePage/>;
+    }
+    
+    return <LogIn/>;
+        
+    
 } 

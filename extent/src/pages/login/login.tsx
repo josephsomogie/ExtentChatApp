@@ -39,6 +39,13 @@ useEffect( ()=>{
         Log In With Google
    </button>
       <p className="pt-2 pb-2"></p>
+      <button 
+   className= "w-100 px-4 rounded-lg shadow-sm bg-white"
+   onClick={() => {signIn('discord', {callbackUrl:'http://localhost:3000'})}}
+   >
+        Log In With Discord
+   </button>
+      <p className="pt-2 pb-2"></p>
    <button 
    className= "w-100 px-4 rounded-lg shadow-sm bg-white"
    onClick={() => router.push('/signup')}

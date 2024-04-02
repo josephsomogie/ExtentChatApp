@@ -5,7 +5,7 @@ import ChatList from "~/components/ChatList";
 import { Chat, Conversation, User } from "~/ClientFunctions/interfaces";
 import React, { useState, useEffect } from "react";
 
-import TabBar from "../../components/tabBar";
+import TabBar from "./tabBar";
 import MessageInput from "~/components/messageInput";
 import HomeHeader from "~/components/homeHeader";
 import NewList from "~/components/newChatList";
