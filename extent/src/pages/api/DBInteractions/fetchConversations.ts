@@ -10,7 +10,8 @@ async function getUserConversations(userId: string) {
       conversations: {
         include: {
           users: true,
-          chats: true,
+          chats: false,
+          //creatorId: false,
 
         },
       },
@@ -24,7 +25,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ){
-  const { userId } = req.query;
+  const userId  = req.query.userId as string;
   if (typeof userId !== 'string') {
     return res.status(400).json({ error: 'User ID must be a string' });
   }

@@ -58,7 +58,7 @@ export default function HomePage() {
     e.preventDefault();
   };
 
- 
+ const [selectedConvo, setSelectedConvo] = useState<String | any>('')
 
   return (
     <>
@@ -78,12 +78,14 @@ export default function HomePage() {
                 <text>{selectedTab}</text>
               </div>
             </center>
-            {selectedTab === "Chats" ? <ChatList chats={chats} /> : <NewList/>}
-            <TabBar
+            <TabBar 
               buttonOneClick={setTabNew}
               buttonTwoClick={setTabChats}
               buttonThreeClick={setTabFriends}
             />
+          
+            {selectedTab === "Chats" ? <ChatList setSelectedChat={setSelectedConvo}/> : <NewList/>}
+            
           </div>
           <div className="w-3/5 justify-self-center  pl-2">
             <ChatWindow selectedChat="1" testMessages={Mess} />

@@ -1,7 +1,10 @@
 export interface User {
+
     id: string;
-    name: string;
-    image: string | null;
+        name: string | null;
+        email: string | null;
+        emailVerified: Date | null;
+        image: string | null;
   }
   
   export interface Chat {
@@ -13,7 +16,7 @@ export interface User {
   export interface Conversation {
     id: string;
     name: string | null;
-    users: User[];
-    chats: Chat[];
-    creatorId: string;
+    users: User[] |null;
+    chats: Chat[] |null;
+    creatorId: string | null;
   }

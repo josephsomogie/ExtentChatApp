@@ -125,7 +125,7 @@ await pushChat(convos[0].id,'clua7m4oz0000ite2b3xy6t14', 'test chat', )
               className="rounded-md bg-white pl-2 pr-2"
               onClick={() => signOut({ callbackUrl: "http://localhost:3000" })}
             >
-              <text>Sign Out</text>
+              <text>Sign Out</text> 
             </button>
             <p className="pl-10"></p>
             
