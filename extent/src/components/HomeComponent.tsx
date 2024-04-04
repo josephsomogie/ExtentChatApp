@@ -45,10 +45,14 @@ export default function HomePage() {
     e.preventDefault();
   };
   const [content, setContent] = useState<string> ('');
-  const handleSend = () => {
+  
+  const handleSend = async () => {
+    
     if(session){
-    pushChat(convoID, session.user.id, content)
+    await pushChat(convoID, session.user.id, content)
+    
     }
+    await loadMessages();
   }
 
  const [selectedConvo, setSelectedConvo] = useState<String | any>('')
@@ -65,7 +69,7 @@ const [messages, setMessages] = useState<Chat | any>([]);
 },[convoID])
 
   return (
-    <>
+    <>  
       <div className="wrapper ">
         <HomeHeader
           buttonOneClick={() =>
