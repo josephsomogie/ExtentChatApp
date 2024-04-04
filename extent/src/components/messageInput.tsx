@@ -1,11 +1,13 @@
 interface messageInputFuncs {
   handleSubmit: (e: any) => any;
   handleSend: (e: any) => any;
+  setContent: (e: any) => any;
 }
 //might run into issues with getting value, if so redesign this component
 export default function MessageInput({
   handleSend,
   handleSubmit,
+  setContent
 }: messageInputFuncs) {
   return (
     <div className="flex justify-center ">
@@ -13,6 +15,7 @@ export default function MessageInput({
         <textarea 
         className="input-message w-full text-wrap break-all"
         placeholder="Type a message..." 
+        onChange={(e)=>{setContent(e.target.value)}}
         >          
         </textarea>
       </form>

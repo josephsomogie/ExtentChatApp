@@ -2,7 +2,7 @@
 import toggleDarkMode from "~/ClientFunctions/DarkmodeToggle";
 import ChatWindow from "~/components/ChatWindow";
 import ChatList from "~/components/ChatList";
-import { Chat, Conversation, User } from "~/ClientFunctions/interfaces";
+import {  Conversation, User } from "~/ClientFunctions/interfaces";
 import React, { useState, useEffect } from "react";
 
 import TabBar from "./tabBar";
@@ -10,34 +10,21 @@ import MessageInput from "~/components/messageInput";
 import HomeHeader from "~/components/homeHeader";
 import NewList from "~/components/newChatList";
 
+import pullMessages from "~/FrontendApiCalls/pullMessages";
+import pushChat from "~/FrontendApiCalls/pushChat";
+import type { Chat } from "@prisma/client";
 import { signOut } from "next-auth/react";
-
+import { useSession } from "next-auth/react";
 export default function HomePage() {
+
+  const {data: session, status } = useSession();
+
   const [darkMode, setDarkMode] = useState(true);
   useEffect(() => {
     toggleDarkMode(darkMode);
   }, [darkMode]);
+ 
 
-  const chats = [
-    { id: 1, name: "Chat 1" },
-    { id: 2, name: "Chat 2" },
-    { id: 3, name: "Chat 3" },
-    { id: 4, name: "Chat 1" },
-    { id: 5, name: "Chat 2" },
-    { id: 6, name: "Chat 3" },
-    { id: 7, name: "Chat 1" },
-    { id: 8, name: "Chat 2" },
-    { id: 9, name: "Chat 3" },
-    { id: 10, name: "Chat 1" },
-    { id: 11, name: "Chat 2" },
-    { id: 12, name: "Chat 3" },
-    { id: 13, name: "Chat 1" },
-    { id: 14, name: "Chat 2" },
-    { id: 15, name: "Chat 3" },
-    { id: 16, name: "Chat 1" },
-    { id: 17, name: "Chat 2" },
-    { id: 18, name: "Chat 3" },
-  ];
   const [test, setTest] = useState(String);
   const newFunc = () => {};
   const Mess = [{ userID: "1", data: "HeyHELP" }];
@@ -57,8 +44,25 @@ export default function HomePage() {
   const handleMessageSubmit = (e: any) => {
     e.preventDefault();
   };
+  const [content, setContent] = useState<string> ('');
+  const handleSend = () => {
+    if(session){
+    pushChat(convoID, session.user.id, content)
+    }
+  }
 
  const [selectedConvo, setSelectedConvo] = useState<String | any>('')
+ const [convoID, setConvoID] = useState<String | any>('')
+
+const [messages, setMessages] = useState<Chat | any>([]);
+ const loadMessages = async () => {
+  const data = await pullMessages(convoID)
+  setMessages(data); 
+ }
+
+ useEffect(()=> {
+   loadMessages();
+},[convoID])
 
   return (
     <>
@@ -84,17 +88,18 @@ export default function HomePage() {
               buttonThreeClick={setTabFriends}
             />
           
-            {selectedTab === "Chats" ? <ChatList setSelectedChat={setSelectedConvo}/> : <NewList/>}
+            {selectedTab === "Chats" ? <ChatList setSelectedChat={setSelectedConvo} setID={setConvoID}/> : <NewList/>}
             
           </div>
           <div className="w-3/5 justify-self-center  pl-2">
-            <ChatWindow selectedChat="1" testMessages={Mess} />
+            <ChatWindow selectedChat={selectedConvo} Messages={messages} />
           </div>
         </div>
 
         <MessageInput
-          handleSend={handleMessageSubmit}
+          handleSend={handleSend}
           handleSubmit={handleMessageSubmit}
+          setContent={setContent}
         />
       </div>
     </>

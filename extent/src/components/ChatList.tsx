@@ -13,10 +13,10 @@ interface Chat {
   interface ChatListProps {
     chats: Chat[];
     setSelectedChat: (name: string) => void;
-    newChatFunc: (convoId: string, userId: string, content: string) => void;
+    setID: (convoId: string) => void;
   }
   
-export default function ChatList({setSelectedChat, newChatFunc}: ChatListProps){
+export default function ChatList({setSelectedChat, setID}: ChatListProps){
   const {data: session, status} = useSession();
   const [convos, setConvos] = useState<Conversation | null>([])
   const getConvos = async () => {
@@ -30,6 +30,10 @@ export default function ChatList({setSelectedChat, newChatFunc}: ChatListProps){
       }
     }else{console.log("No User Session")}
   }
+  const setData = (name:any, id:any) =>{
+setSelectedChat(name);
+setID(id);
+  }
 
   useEffect(()=>{getConvos()},[session]);
 
@@ -40,10 +44,11 @@ export default function ChatList({setSelectedChat, newChatFunc}: ChatListProps){
              
                 <div
                   key={convo.id}
-                  onClick={() => setSelectedChat( convo.name)}
+                  onClick={() => setData(convo.name, convo.id)}
                   className=" mb-2 cursor-pointer rounded-full bg-blue-500 px-4 py-2"
                 >
                   {convo.name}
+                  
                 </div>
             )) : <p>Loading...</p>}
           </div>

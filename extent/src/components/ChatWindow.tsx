@@ -1,33 +1,34 @@
 import React, { useEffect, useRef } from 'react';
+import type { Chat } from '@prisma/client';
+import { useSession } from 'next-auth/react';
 
-interface Message {
-  userID: string;
-  data: string;
-  id: string;
-}
 
 interface ChatWindowProps {
   selectedChat: string;
-  testMessages: Message[];
+  Messages: Chat[];
 }
 
-const ChatWindow = ( {selectedChat, testMessages}:ChatWindowProps ) => {
+const ChatWindow = ( {selectedChat, Messages}:ChatWindowProps ) => {
+
+  const {data: session, status} = useSession();
   // Reference to the last message
   const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
 
   // Effect to scroll to the last message
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [testMessages]);
+  }, [Messages]);
 
   return (
     <div className="chatwindow">
+      <center>
       <h2>{selectedChat}</h2>
-              {testMessages.length === 0 ? (<p>Loading...</p>) : testMessages.map((message, index) => (
+      </center>
+              {Messages === undefined ? (<p>Loading...</p>) : Messages.map((message, index) => (
                 <div
                   className={
                     
-                    message.userID === '1'
+                    message.userId === session?.user.id
                       ? "flex justify-end"
                       : "flex justify-start"
                   }
@@ -35,23 +36,23 @@ const ChatWindow = ( {selectedChat, testMessages}:ChatWindowProps ) => {
                 >
                   <div>
                     <text className="text-left text-sm ">
-                      {message.userID} said:
+                      {message.username} said:
                     </text>
                     <div
                       className={
-                        message.userID !== '1'
+                        message.userId !== session?.user.id
                           ? " w-auto rounded-lg bg-white text-center"
                           : " w-auto rounded-lg bg-blue-900 text-center"
                       }
                     >
-                      {message.userID !== '1' ? (
-                        <div className="flex items-center text-wrap">
+                      {message.userId !== session?.user.id ? (
+                        <div className="flex items-center  text-wrap">
                           {/*<Pfp />*/}
-                          <text className="text-2xl p-2 break-words max-w-xl">{message.data}</text>
+                          <text className="text-2xl p-2 break-words max-w-xl">{message.content}</text>
                         </div>
                       ) : (
-                        <div className="flex items-center text-wrap">
-                          <text className="text-2xl p-2 break-words max-w-xl">{message.data}</text>
+                        <div className="flex items-center  j text-wrap">
+                          <text className="text-2xl p-2 break-words max-w-xl">{message.content}</text>
                           {/*<Pfp />*/}
                         </div>
                       )}
