@@ -15,6 +15,7 @@ import pushChat from "~/FrontendApiCalls/pushChat";
 import type { Chat } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+
 export default function HomePage() {
 
   const {data: session, status } = useSession();
@@ -25,9 +26,6 @@ export default function HomePage() {
   }, [darkMode]);
  
 
-  const [test, setTest] = useState(String);
-  const newFunc = () => {};
-  const Mess = [{ userID: "1", data: "HeyHELP" }];
 
   //tab name useState
   const [selectedTab, setSelectedTab] = useState("Chats");
@@ -44,13 +42,11 @@ export default function HomePage() {
   const handleMessageSubmit = (e: any) => {
     e.preventDefault();
   };
+
   const [content, setContent] = useState<string> ('');
-  
   const handleSend = async () => {
-    
     if(session){
     await pushChat(convoID, session.user.id, content)
-    
     }
     await loadMessages();
   }
@@ -61,12 +57,23 @@ export default function HomePage() {
 const [messages, setMessages] = useState<Chat | any>([]);
  const loadMessages = async () => {
   const data = await pullMessages(convoID)
+  //if(data && data.length > 0){
   setMessages(data); 
+  //}
  }
 
  useEffect(()=> {
-   loadMessages();
+  loadMessages();
+  
 },[convoID])
+
+
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
 
   return (
     <>  
@@ -99,13 +106,15 @@ const [messages, setMessages] = useState<Chat | any>([]);
             <ChatWindow selectedChat={selectedConvo} Messages={messages} />
           </div>
         </div>
-
+          {convoID !=='' ?
         <MessageInput
           handleSend={handleSend}
           handleSubmit={handleMessageSubmit}
           setContent={setContent}
-        />
+        /> : <center><p>No Conversation!</p></center>
+          }
       </div>
+      
     </>
   );
 }

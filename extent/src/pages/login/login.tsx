@@ -14,7 +14,7 @@ export default  function LogIn(){
     const [errMsg, setErrMsg] = useState(null)
     const [passVis, setPassVis] = useState(null)
     const [sampleData, setSampleData] = useState("Test")
-  let router = useRouter()
+  let router = useRouter();
     const handleInputChange = (event: any) => {
         setUsername(event.target.value);
       };
