@@ -8,6 +8,7 @@ export default function NewList(){
   const [query, setQuery] = useState("");
   const[newChatId, setNewChatId] = useState("")
   const loadQuery = async () =>{
+    if(query.length ===0) return;
     const userData = await  searchUsers(query);
     setUsers(userData)
     console.log("user data: "+userData)
@@ -29,23 +30,24 @@ export default function NewList(){
     return (
       <div>
       <center>
-        <div>
+        <div className='flex flex-row justify-center'>
           <form
           onSubmit={loadQuery}
           >
             <textarea 
+            className='rounded-sm'
             placeholder="Search by username"
             value={query}
             onChange={(e)=>{setQuery(e.target.value)}}
+            />
             
-            >
-            </textarea>
           </form>
           <button
         onClick={loadQuery}
-        ><text>search</text></button>
+        className=' m-2 p-1 rounded-md text-white bg-blue-500'
+        >search</button>
         </div>
-        <div>
+        <div className=''>
           {users ? users.map((user:User) =>(
             <div>
             <div
@@ -60,7 +62,7 @@ export default function NewList(){
             <Modal isOpen={isModalOpen} toggle={toggleModal} user={user} id={myId}/>
           </div>
           
-          )): <p>Make a search</p>}
+          )): <p>Make a search...</p>}
         </div>
         
       </center>
@@ -94,7 +96,7 @@ const [convoName, setConvoName] = useState<string | null>(null)
     <div>
       
       {isOpen && (
-        <dialog onClick={(e)=>{handleBackgroundClick(e)}}className="fixed left-0 top-0 w-full h-full rounded-md bg-black bg-opacity-50 z-50 overflow-auto backdrop-blur flex justify-center items-center">
+        <dialog onClick={(e)=>{handleBackgroundClick(e)}}className="fixed left-0 top-0 w-full h-full rounded-md bg-black bg-opacity-50 z-50 overflow-auto  flex justify-center items-center">
           <div className="bg-gray-200 m-auto p-8">
             <div className="flex flex-col items-center">
               <h3>New Conversation with  {user.name}</h3>

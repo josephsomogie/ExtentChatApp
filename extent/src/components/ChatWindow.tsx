@@ -36,7 +36,7 @@ const ChatWindow = ( {selectedChat, Messages}:ChatWindowProps ) => {
                 >
                   <div>
                     <text className="text-left text-sm ">
-                      {message.username} said:
+                      {message.username} at  {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}:
                     </text>
                     <div
                       className={

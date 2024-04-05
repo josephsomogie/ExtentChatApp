@@ -1,5 +1,5 @@
 
-export default async function pushChat(convoId: string, userId: string, content: string):Promise<void>{
+export default async function pushChat(convoId: string, userId: string, content: string, username: string):Promise<void>{
     try{
     const response = await fetch('/api/DBInteractions/newChat', {
         method: 'POST',
@@ -10,6 +10,7 @@ export default async function pushChat(convoId: string, userId: string, content:
             convoId:convoId,
             userId:userId,
             content:content,
+            username: username
 
         })
       });

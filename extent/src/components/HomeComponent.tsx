@@ -46,7 +46,7 @@ export default function HomePage() {
   const [content, setContent] = useState<string> ('');
   const handleSend = async () => {
     if(session){
-    await pushChat(convoID, session.user.id, content)
+    await pushChat(convoID, session.user.id, content, session.user.name);
     }
     await loadMessages();
   }
@@ -69,11 +69,7 @@ const [messages, setMessages] = useState<Chat | any>([]);
 
 
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  }
+ 
 
   return (
     <>  
@@ -97,6 +93,7 @@ const [messages, setMessages] = useState<Chat | any>([]);
               buttonOneClick={setTabNew}
               buttonTwoClick={setTabChats}
               buttonThreeClick={setTabFriends}
+              selected={selectedTab}
             />
           
             {selectedTab === "Chats" ? <ChatList setSelectedChat={setSelectedConvo} setID={setConvoID}/> : <NewList/>}

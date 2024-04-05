@@ -2,25 +2,28 @@ interface TabBarFuncs{
     buttonOneClick: () => void;
     buttonTwoClick: () => void;
     buttonThreeClick: () => void;
+    selected: string;
 }
 
-export default function TabBar({buttonOneClick, buttonTwoClick, buttonThreeClick}:TabBarFuncs) {
+export default function TabBar({buttonOneClick, buttonTwoClick, buttonThreeClick, selected}:TabBarFuncs) {
+  const selectedClass:string = "w-1/3  bg-blue-500 text-white px-4 shadow-sm p-1"
+  const unselectedClass:string = "w-1/3 rounded-sm bg-gray-700 text-white px-4 shadow-sm p-1"
   return (
-    <div className='pb-2'>
-      <button className=" w-1/3 rounded-sm bg-cyan-600 px-4 shadow-sm p-1 "
+    <div className='pb-2 flex flex-row'>
+      <button className={selected==="New" ?  selectedClass : unselectedClass } 
       onClick={buttonOneClick}
       >
-        <text>new chat</text>
+        new chat
       </button>
-      <button className=" w-1/3 rounded-sm bg-cyan-600 px-4 shadow-sm p-1"
+      <button className={selected==="Chats" ?  selectedClass : unselectedClass }
       onClick={buttonTwoClick}
       >
-        <text>Chats</text>
+       Chats
       </button>
-      <button className=" w-1/3 rounded-sm bg-cyan-600 px-4 shadow-sm p-1 "
+      <button className={selected==="Friends" ?  selectedClass : unselectedClass }
       onClick={buttonThreeClick}
       >
-        <text>Friends</text>
+       Friends
       </button>
     </div>
   );
