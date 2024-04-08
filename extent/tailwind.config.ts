@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        ubuntu: ['Ubuntu', 'sans-serif'],
       },
     },
   },

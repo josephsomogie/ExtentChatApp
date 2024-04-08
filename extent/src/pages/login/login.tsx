@@ -25,7 +25,10 @@ useEffect( ()=>{
       
     return(
     
-  <Wrapper>
+  <div className="w-screen h-screen flex-col animated-background">
+     <div className='content-wrapper'>
+
+  
       
         <center className="pb-10 pt-10">
         <AutoLogo/>
@@ -33,21 +36,21 @@ useEffect( ()=>{
 
             <center className="pt-5">
    <button 
-   className= "w-100 px-4 rounded-lg shadow-sm bg-white"
+   className= "w-100 px-4 rounded-lg shadow-sm bg-white font-ubuntu font-bold"
    onClick={() => {signIn('google', {callbackUrl:'http://localhost:3000'})}}
    >
         Log In With Google
    </button>
       <p className="pt-2 pb-2"></p>
       <button 
-   className= "w-100 px-4 rounded-lg shadow-sm bg-white"
+   className= "w-100 px-4 rounded-lg shadow-sm bg-white font-ubuntu font-bold"
    onClick={() => {signIn('discord', {callbackUrl:'http://localhost:3000'})}}
    >
         Log In With Discord
    </button>
       <p className="pt-2 pb-2"></p>
    <button 
-   className= "w-100 px-4 rounded-lg shadow-sm bg-white"
+   className= "w-100 px-4 rounded-lg shadow-sm bg-white font-ubuntu font-bold"
    onClick={() => router.push('/signup')}
    >
         Sign Up
@@ -55,7 +58,8 @@ useEffect( ()=>{
    <p className="pt-2"></p>
    
    </center>
+   </div>
       
-      </Wrapper>
+      </div>
     )
 }

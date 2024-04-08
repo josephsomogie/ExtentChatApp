@@ -1,8 +1,10 @@
 
 import { db } from "~/server/db";
+import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-async function searchUsernames(query: string): Promise<any> {
+async function searchUsernames(query: string, ): Promise<any> {
     // Ensure the search query is not empty and trim any whitespace
     if (!query.trim()) {
         return [];
@@ -28,8 +30,14 @@ async function searchUsernames(query: string): Promise<any> {
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse
+    res: NextApiResponse,
+    userId: string
   ) {
+    //const {data:session} = useSession();
+  //if (!session) {
+    //return res.status(401).json({ message: 'Unauthorized' });
+  //}
+  
     // Only process GET requests
     if (req.method === 'GET') {
       try {

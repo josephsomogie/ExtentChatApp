@@ -73,13 +73,13 @@ const [messages, setMessages] = useState<Chat | any>([]);
 
   return (
     <>  
-      <div className="wrapper ">
+      <div className="wrapper">
         <HomeHeader
           buttonOneClick={() =>
             signOut({ callbackUrl: "http://localhost:3000" })
           }
           buttonTwoClick={() => {setDarkMode(!darkMode)}}
-          buttonThreeClick={() => {}}
+          buttonThreeClick={() => {}} 
           darkMode={darkMode}
         />
         <div className="  flex h-5/6 w-screen justify-start  bg-white pb-4 pt-2 dark:bg-zinc-900">

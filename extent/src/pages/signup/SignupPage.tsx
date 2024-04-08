@@ -47,7 +47,11 @@ useEffect(() =>{
 const { data: session_test } = useSession();
 //http://localhost:3000/api/auth/signin
     return(
-<Wrapper>
+
+  <div className='w-screen h-screen flex-col animated-background'>
+  <div className='content-wrapper'>
+
+ <center>
     <p className ="pt-5"></p>
     <AutoLogo/>
    
@@ -56,7 +60,7 @@ const { data: session_test } = useSession();
     >
     <input
     onChange={(event) => handleInputChange(event, setUsername)}
-    className="w-100 px-4 py-2 text-lg placeholder-white bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+    className="w-100 px-4 py-2 text-lg placeholder-white bg-cyan-600   rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 "
     placeholder="Username"
     ></input>
     </p>
@@ -100,7 +104,7 @@ const { data: session_test } = useSession();
         
         
         >
-          <text>Create Account</text>
+          <text className='font-ubuntu font-bold'>Create Account</text>
         </button>
         <p className = 'pt-2 pb-2 '></p>
       
@@ -110,9 +114,12 @@ const { data: session_test } = useSession();
         onClick={ () =>router.replace('/login')}
         
         >
-          <text> Log In </text>
+          <text className='font-ubuntu font-bold'> Log In </text>
         </button>
-</Wrapper>
+        </center>
+        </div>
+        </div>
+
     );
 }
 

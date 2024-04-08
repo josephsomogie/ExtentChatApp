@@ -26,3 +26,79 @@
 .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Hide scrollbar for Chrome, Safari and Opera */
   }
+
+  .animated-background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg, #ff00ff, #8800ff);
+    overflow: hidden;
+    z-index: 1; /* Ensure this is the starting point for z-index in this container */
+  }
+  
+  .animated-background::before, .animated-background::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Position these below the content */
+    background: linear-gradient(45deg, #ff0000, #ff00ff);
+    opacity: 0;
+    animation: colorBlend1 10s infinite linear;
+  }
+  
+  .animated-background::after {
+    background: linear-gradient(45deg, #00ff00, #0000ff);
+    animation: colorBlend2 10s infinite linear;
+  }
+  
+  .content-wrapper {
+    position: relative;
+    z-index: 2; /* Ensures content is on top */
+    /* Other styling as needed */
+  }
+  @keyframes colorWave {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Additional keyframes for more complex animations */
+  @keyframes colorBlend1 {
+    0%, 100% {
+      opacity: 1;
+    }
+    33%, 66% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes colorBlend2 {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src: url('/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Ubuntu';
+    src: url('/fonts/Ubuntu/Ubuntu-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
