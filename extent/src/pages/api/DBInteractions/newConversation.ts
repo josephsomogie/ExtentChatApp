@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '~/server/db';
 import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '~/server/auth';
 
 async function createUserConversation(name: string, users: string[], creator: string) {
   await db.conversation.create({
@@ -19,12 +21,11 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
   ){
-   // const session = await getSession({req});
-    
-    
-   // if(!session || creator !== session?.user.id){
-     // return res.status(401).json({message: "Unauthorized"})
-   // }
+    const session = await getServerSession(req, res, authOptions);
+  if(!session){
+    res.status(401).json({error:"Unauthorized"});
+    return;
+}
     if(req.method === 'POST'){
         try{
           const { name, users, creator } = req.body;

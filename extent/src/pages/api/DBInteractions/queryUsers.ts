@@ -3,6 +3,8 @@ import { db } from "~/server/db";
 import { getSession } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from "next-auth";
+import { authOptions } from "~/server/auth";
 
 async function searchUsernames(query: string, ): Promise<any> {
     // Ensure the search query is not empty and trim any whitespace
@@ -33,10 +35,11 @@ export default async function handler(
     res: NextApiResponse,
     userId: string
   ) {
-    //const {data:session} = useSession();
-  //if (!session) {
-    //return res.status(401).json({ message: 'Unauthorized' });
-  //}
+    const session = await getServerSession(req, res, authOptions);
+  if(!session){
+    res.status(401).json({error:"Unauthorized"});
+    return;
+}
   
     // Only process GET requests
     if (req.method === 'GET') {

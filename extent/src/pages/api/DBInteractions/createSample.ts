@@ -1,11 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '~/server/db';
-
+import { getServerSession } from 'next-auth';
+import { authOptions } from '~/server/auth';
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+ 
+
   if (req.method === 'POST') {
     const { data, userID } = req.body;
     try {
@@ -23,5 +26,6 @@ export default async function handler(
     res.setHeader('Allow', ['POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
+
   
 }

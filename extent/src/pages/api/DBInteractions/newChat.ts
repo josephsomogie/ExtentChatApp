@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '~/server/auth';
 import { db } from "~/server/db";
 
 async function createChatMessage(convoId: string, userId: string, content: string, username:string): Promise<void> {
@@ -28,6 +30,11 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
   ) {
+    const session = await getServerSession(req, res, authOptions);
+    if(!session){
+      res.status(401).json({error:"Unauthorized"});
+      return;
+  }
     // Only allow POST requests for creating a new chat message
     if (req.method === 'POST') {
       try {
