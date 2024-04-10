@@ -53,7 +53,7 @@ const ChatWindow = ( {selectedChat, Messages}:ChatWindowProps ) => {
                         </div>
                       ) : (
                         <div className="flex items-center  text-wrap">
-                          <text className="text-2xl p-2 break-words w-fit max-w-xl">{message.content}</text>
+                          <text className="text-2xl p-2 break-words w-fit max-w-xl text-white">{message.content}</text>
                           {/*<Pfp />*/}
                           {/*session.user.image? <img src={session.user.image} width='50' className='rounded-lg justify-self-end' ></img> : <img src='/images/blank_pfp.png' > </img>*/}
                         </div>
