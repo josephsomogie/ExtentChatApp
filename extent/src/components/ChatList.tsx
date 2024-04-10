@@ -1,5 +1,5 @@
 //Joseph Somogie 2024
-//Reusable list component for our conversation navigation.
+//Reusable list component for our conversation navigation in Extent. see end of file for detailed description
 //props/params: chats -- an array of chat objects | setSelectedChat -- a function passed in to control an external state variable
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
@@ -18,7 +18,9 @@ interface ChatListProps {
 
 export default function ChatList({ setSelectedChat, setID }: ChatListProps) {
   const { data: session, status } = useSession();
+
   const [convos, setConvos] = useState<Conversation[] | null>([]);
+
   const getConvos = async () => {
     if (session) {
       const data = await pullConversations(session.user.id);
@@ -58,3 +60,18 @@ export default function ChatList({ setSelectedChat, setID }: ChatListProps) {
     </div>
   );
 }
+
+/**********Description*************/
+/*
+This React component, ChatList, is designed for navigating conversation 
+threads in the Extent application. It uses useSession from NextAuth for 
+session management. The component accepts chats, an array of chat objects, 
+and two functions, setSelectedChat and setID, to manage external state 
+based on user interaction. Upon initialization and whenever the session 
+updates, it fetches conversation data using pullConversations, updating 
+local state with the response. Each conversation is rendered as a 
+clickable element, which upon click, updates selected chat details through 
+setData, invoking the passed-in state management functions with the 
+conversation's name and ID. Error handling is in place for both unsuccessful 
+data fetching and absence of a user session.
+*/

@@ -18,6 +18,8 @@ export default async function pushChat(convoId: string, userId: string, content:
         const errorMessage = await response.text();
         throw new Error(`Failed to create chat: ${errorMessage}`);
       }
+        
+      
 
     const data = await response.json();
     return data;

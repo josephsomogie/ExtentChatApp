@@ -48,16 +48,18 @@ const ChatWindow = ( {selectedChat, Messages}:ChatWindowProps ) => {
                       {message.userId !== session?.user.id ? (
                         <div className="flex items-center  text-wrap">
                           {/*<Pfp />*/}
-                          <text className="text-2xl p-2 break-words max-w-xl">{message.content}</text>
+                         
+                          <text className="text-2xl p-2 break-words  w-fit max-w-xl">{message.content}</text>
                         </div>
                       ) : (
-                        <div className="flex items-center  j text-wrap">
-                          <text className="text-2xl p-2 break-words max-w-xl">{message.content}</text>
+                        <div className="flex items-center  text-wrap">
+                          <text className="text-2xl p-2 break-words w-fit max-w-xl">{message.content}</text>
                           {/*<Pfp />*/}
+                          {/*session.user.image? <img src={session.user.image} width='50' className='rounded-lg justify-self-end' ></img> : <img src='/images/blank_pfp.png' > </img>*/}
                         </div>
+                        
                       )}
                     </div>
-                    {/*<text className="text-left text-sm">at {message.date}</text>*/}
                   </div>
                 </div>
               ))}

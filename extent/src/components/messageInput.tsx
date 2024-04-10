@@ -21,10 +21,10 @@ export default function MessageInput({ handleSend, handleSubmit, setContent }: m
   };
 
   return (
-    <div className="flex justify-center">
-      <form onSubmit={onSend} className="flex">
+    <div className="flex justify-center w-screen">
+      <form onSubmit={onSend} className="flex w-1/2 max-h-fit ">
         <textarea 
-          className="input-message w-full text-wrap break-all"
+          className="input-message w-full text-wrap break-all max-h-fit resize-none"
           placeholder="Type a message..." 
           onChange={onChange}
           value={val}

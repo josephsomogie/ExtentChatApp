@@ -10,10 +10,10 @@
 }
 
 .chatlist {
-    @apply ml-4 h-[90%] items-center overflow-y-auto rounded-lg bg-gray-300 dark:bg-slate-500 p-2 hide-scrollbar
+    @apply ml-4 h-[90%] items-center overflow-y-auto rounded-lg  p-2 hide-scrollbar
 }
 .chatwindow{
-    @apply   h-full w-full items-center overflow-y-auto rounded-lg bg-gray-300 dark:bg-slate-500 p-2
+    @apply   h-full w-full items-center overflow-y-auto rounded-lg bg-gray-300 dark:bg-slate-500 dark:bg-gradient-to-r from-indigo-900 to-teal-500  p-2
 }
 .homepage-header{
     @apply flex justify-center rounded-md bg-gray-300 dark:bg-gray-900  p-2
@@ -29,10 +29,10 @@
 
   .animated-background {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    /*width: 100vw;
+    height: 100vh;*/
     background: linear-gradient(45deg, #ff00ff, #8800ff);
-    overflow: hidden;
+    /*overflow: hidden;*/
     z-index: 1; /* Ensure this is the starting point for z-index in this container */
   }
   
@@ -90,6 +90,10 @@
     }
   }
 
+
+
+
+  /***************************FONTS***********************************/
   @font-face {
     font-family: 'Ubuntu';
     src: url('/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');

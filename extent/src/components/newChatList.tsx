@@ -35,7 +35,7 @@ export default function NewList(){
           onSubmit={loadQuery}
           >
             <textarea 
-            className='rounded-sm'
+            className='rounded-sm resize-none'
             placeholder="Search by username"
             value={query}
             onChange={(e)=>{setQuery(e.target.value)}}
