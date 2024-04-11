@@ -144,7 +144,7 @@ useEffect(() => {
         />
         <div className="  flex h-5/6 w-screen justify-start pl-4  bg-white pb-4 pt-4 dark:bg-zinc-900">
     
-          <div className="h-full w-1/5 flex-col overflow-hidden  rounded-lg bg-gray-300 dark:bg-gradient-to-r from-indigo-900 to-gray-900">
+          <div className="h-full w-1/5 flex-col overflow-hidden  rounded-lg bg-gray-300 dark:bg-gradient-to-r from-gray-900 to-indigo-900">
             <TabBar 
               buttonOneClick={setTabNew}
               buttonTwoClick={setTabChats}
@@ -152,7 +152,7 @@ useEffect(() => {
               selected={selectedTab}
             />
           
-            {selectedTab === "Chats" ? <ChatList setSelectedChat={setSelectedConvo} setID={setConvoID}/> : <NewList/>}
+            {selectedTab === "Chats" ? <ChatList selectedChat={selectedConvo }setSelectedChat={setSelectedConvo} setID={setConvoID}/> : <NewList/>}
             
           </div>
           <div className="w-[70%] justify-self-center  pl-4">

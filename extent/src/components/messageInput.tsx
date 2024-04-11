@@ -24,7 +24,7 @@ export default function MessageInput({ handleSend, handleSubmit, setContent }: m
     <div className="flex justify-center w-screen">
       <form onSubmit={onSend} className="flex w-1/2 max-h-fit ">
         <textarea 
-          className="input-message w-full text-wrap break-all max-h-fit resize-none"
+          className="input-message w-full text-wrap break-all max-h-fit resize-none dark:text-white text-black"
           placeholder="Type a message..." 
           onChange={onChange}
           value={val}

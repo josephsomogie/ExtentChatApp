@@ -35,18 +35,19 @@ const ChatWindow = ( {selectedChat, Messages}:ChatWindowProps ) => {
                   key={index}
                 >
                   <div>
-                    <text className="text-left text-sm ">
+                    
+                    <text className={ message.userId !== session?.user.id ? "text-left text-sm dark:text-white" : "text-left text-sm "}>
                       {message.username} at  {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}:
                     </text>
                     <div
                       className={
                         message.userId !== session?.user.id
-                          ? " w-auto rounded-lg bg-white text-center"
-                          : " w-auto rounded-lg bg-blue-900 text-center"
+                          ? " w-auto rounded-lg bg-white text-left"
+                          : " w-auto rounded-lg bg-blue-900 text-left"
                       }
                     >
                       {message.userId !== session?.user.id ? (
-                        <div className="flex items-center  text-wrap">
+                        <div className="flex   items-center text-wrap">
                           {/*<Pfp />*/}
                          
                           <text className="text-2xl p-2 break-words  w-fit max-w-xl">{message.content}</text>

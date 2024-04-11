@@ -12,11 +12,12 @@ interface Chat {
 
 interface ChatListProps {
   chats: Chat[];
+  selectedChat: string;
   setSelectedChat: (name: string) => void;
   setID: (convoId: string) => void;
 }
 
-export default function ChatList({ setSelectedChat, setID }: ChatListProps) {
+export default function ChatList({ selectedChat, setSelectedChat, setID }: ChatListProps) {
   const { data: session, status } = useSession();
 
   const [convos, setConvos] = useState<Conversation[] | null>([]);
@@ -49,7 +50,7 @@ export default function ChatList({ setSelectedChat, setID }: ChatListProps) {
           <div
             key={convo.id}
             onClick={() => setData(convo.name, convo.id)}
-            className=" mb-2 cursor-pointer rounded-full bg-blue-500 px-4 py-2"
+            className={convo.name === selectedChat ? " mb-2 cursor-pointer rounded-sm bg-blue-400 px-4 py-2 text-white  ":" mb-2 cursor-pointer rounded-sm bg-gray-600 px-4 py-2 dark:text-white text-black hover:bg-gray-400"}
           >
             {convo.name}
           </div>
