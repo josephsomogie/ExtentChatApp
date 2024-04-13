@@ -1,23 +1,28 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { Chat } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 
 
 interface ChatWindowProps {
   selectedChat: string;
+  typing: boolean;
   Messages: Chat[];
+
 }
 
-const ChatWindow = ( {selectedChat, Messages}:ChatWindowProps ) => {
+const ChatWindow = ( {selectedChat, Messages, typing}:ChatWindowProps ) => {
 
   const {data: session, status} = useSession();
   // Reference to the last message
   const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
 
+ 
+
   // Effect to scroll to the last message
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [Messages]);
+  useEffect(()=>{},[typing])
 
   return (
     <div className="chatwindow">
@@ -60,11 +65,15 @@ const ChatWindow = ( {selectedChat, Messages}:ChatWindowProps ) => {
                         </div>
                         
                       )}
+                      
+                        
                     </div>
                   </div>
+                  
                 </div>
+                
               ))}
-      
+      {typing ? <div className='text-white pt-4'>typing...</div> : null}
       <div ref={endOfMessagesRef} />
     </div>
   );

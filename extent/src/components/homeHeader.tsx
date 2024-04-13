@@ -24,7 +24,8 @@ export default function HomeHeader({buttonOneClick,buttonTwoClick,buttonThreeCli
               <text>{!darkMode ? "Dark Mode" : "Light Mode"}</text>
             </button>
             <p className="pl-10"></p>
-            <button className="rounded-md bg-white pl-2 pr-2">
+            <button className="rounded-md bg-white pl-2 pr-2"
+            onClick={buttonThreeClick}>
               <text>My Account</text>
             </button>
           </div>
