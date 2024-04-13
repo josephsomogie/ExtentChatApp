@@ -141,6 +141,7 @@ useEffect(() => {
 
   return () => {
     console.log('Leaving convo on cleanup for convo', currentConvoID, convoID);
+    socket.emit('notTyping', { convoId:convoID });
     socket.emit('leaveConversation', { convoId: currentConvoID });
     cleanupListeners();
   };
