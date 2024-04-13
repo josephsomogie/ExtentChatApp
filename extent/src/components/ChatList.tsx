@@ -56,7 +56,7 @@ export default function ChatList({ selectedChat, setSelectedChat, setID }: ChatL
           </div>
         ))
       ) : (
-        <p>Loading...</p>
+        <p ><text className ="content-center dark:text-white ">Loading...</text></p>
       )}
     </div>
   );

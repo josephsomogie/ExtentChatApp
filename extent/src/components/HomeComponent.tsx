@@ -146,10 +146,7 @@ useEffect(() => {
     cleanupListeners();
   };
 }, [convoID]); // Dependency on convoID
-const doTheThing = () =>{
- socket.emit('leaveConversation', convoID)
-  console.log('Doing thing... :DDD', convoID)
-}
+
 /***********************************TYPING NOTIFICATION *******************************************************/
 
 const [typing, setTyping] = useState(false);
@@ -177,7 +174,7 @@ useEffect(() => {
   };
   // Initial check and set interval
   checkTyping();
-  const timer = setInterval(checkTyping, 3000);
+  const timer = setInterval(checkTyping, 1500);
   // Cleanup: clear interval and ensure not typing is emitted when content is cleared
   return () => {
     clearInterval(timer);
@@ -191,17 +188,17 @@ useEffect(() => {
 /**************************************USER INTERFACE*****************************************/
   return (
     <>  
-      <div className="wrapper">
-       
-        <HomeHeader
+      <div className="animated-background w-screen h-screen flex flex-col">
+      <HomeHeader
           buttonOneClick={() =>
             signOut({ callbackUrl: "http://localhost:3000" })
           }
           buttonTwoClick={() => {setDarkMode(!darkMode)}}
-          buttonThreeClick={doTheThing} 
+          buttonThreeClick={()=>{}} 
           darkMode={darkMode}
         />
-        <div className="  flex h-5/6 w-screen justify-start pl-4  bg-white pb-4 pt-4 dark:bg-zinc-900">
+        
+        <div className="  flex h-5/6 w-screen justify-start pl-4  pb-4 pt-4 bg-transparent">
     
           <div className="h-full w-1/5 flex-col overflow-hidden  rounded-lg bg-gray-300 dark:bg-gradient-to-r from-gray-900 to-indigo-900">
             <TabBar 
@@ -217,6 +214,7 @@ useEffect(() => {
           <div className="w-[70%] justify-self-center  pl-4">
             <ChatWindow selectedChat={selectedConvo} Messages={messages} typing={typing}/>
           </div>
+          
         </div>
           {convoID !=='' ?
         <MessageInput
@@ -224,7 +222,7 @@ useEffect(() => {
           handleSubmit={handleMessageSubmit}
           setContent={setContent}
           
-        /> : <center><p>No Conversation!</p></center>
+        /> : <center><p className ="content-center dark:text-white ">Select a Conversation...</p></center>
           }
       </div>
     </>
