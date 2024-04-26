@@ -1,0 +1,4 @@
+This folder is Walmart version tRPC.
+FrontendApiCalls folder is a collection of "middleware" files for interacting with the API.
+The structured functions ensure typesafety and  make it easier to add new methods as needed.
+It also simplifies the tsx files, as API calls can be made in much simpler terms without having to rewrite GET/POST fetch requests.

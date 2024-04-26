@@ -1,5 +1,5 @@
-import searchUsers from "~/FrontendApiCalls/searchUsers";
-import pushConversations from "~/FrontendApiCalls/pushConversation";
+import searchUsers from "~/customMiddleware/searchUsers";
+import pushConversations from "~/customMiddleware/pushConversation";
 import { User } from "~/ClientFunctions/interfaces";
 import { useState } from "react";
 import { useSession } from "next-auth/react";

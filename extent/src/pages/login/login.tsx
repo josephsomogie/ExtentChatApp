@@ -35,7 +35,7 @@ export default function LogIn() {
 
         <center className="pt-5">
           <button
-            className="w-100 rounded-lg bg-white px-4 font-ubuntu font-bold shadow-sm"
+            className="w-100 rounded-lg bg-transparent text-white outline hover:outline-none hover:bg-white hover:text-black px-4 font-ubuntu font-bold shadow-sm"
             onClick={() => {
               signIn("google", { callbackUrl: "http://localhost:3000" });
             }}
@@ -44,7 +44,7 @@ export default function LogIn() {
           </button>
           <p className="pb-2 pt-2"></p>
           <button
-            className="w-100 rounded-lg bg-white px-4 font-ubuntu font-bold shadow-sm"
+            className="w-100 rounded-lg bg-transparent text-white outline hover:outline-none hover:bg-white hover:text-black px-4 font-ubuntu font-bold shadow-sm"
             onClick={() => {
               signIn("discord", { callbackUrl: "http://localhost:3000" });
             }}
@@ -53,7 +53,7 @@ export default function LogIn() {
           </button>
           <p className="pb-2 pt-2"></p>
           <button
-            className="w-100 rounded-lg bg-white px-4 font-ubuntu font-bold shadow-sm"
+            className="w-100 rounded-lg bg-transparent text-white outline hover:outline-none hover:bg-white hover:text-black px-4 font-ubuntu font-bold shadow-sm"
             onClick={() => router.push("/signup")}
           >
             Sign Up

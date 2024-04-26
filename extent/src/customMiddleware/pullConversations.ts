@@ -12,5 +12,5 @@ if(response.ok){
     console.log("data: "+data);
     
     return data;
-}else{console.log("error: test")}
+}else{console.log("error pulling conversations")}
 }

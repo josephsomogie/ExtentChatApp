@@ -64,13 +64,19 @@ model User {
     posts         Post[]
     chats         Chat[]
     conversations Conversation[]
-    friends       Friendship[]
+    sentFriends Friendship[] @relation("SenderRelation")
+  receivedFriends Friendship[] @relation("FriendRelation")
     blocked       Block[]  
 }
 
 model Friendship {
-  friendId  String @unique
-  user      User @relation(fields: [friendId], references: [id])
+  id       String  @id @default(cuid())
+  friendId String  // ID of the friend user
+  senderId String  // ID of the sender user
+  accepted Boolean @default(false)
+  
+  friend   User @relation("FriendRelation", fields: [friendId], references: [id])
+  sender   User @relation("SenderRelation", fields: [senderId], references: [id])
 }
 model Block {
   blockedId String @unique

@@ -32,7 +32,7 @@ export default function MessageInput({ handleSend, handleSubmit, setContent }: m
 
 
   return (
-    <div className="flex justify-center w-screen">
+    <div className="flex justify-center w-screen font-ubuntu">
       <form onSubmit={(e:any) => {e.preventDefault()}} className="flex w-1/2 max-h-fit ">
         <textarea 
           className="input-message w-full text-wrap break-all max-h-fit resize-none dark:text-white text-black"

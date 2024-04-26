@@ -4,7 +4,7 @@
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { Conversation } from "~/ClientFunctions/interfaces";
-import pullConversations from "~/FrontendApiCalls/pullConversations";
+import pullConversations from "~/customMiddleware/pullConversations";
 interface Chat {
   id: string;
   name: string;
@@ -17,7 +17,11 @@ interface ChatListProps {
   setID: (convoId: string) => void;
 }
 
-export default function ChatList({ selectedChat, setSelectedChat, setID }: ChatListProps) {
+export default function ChatList({
+  selectedChat,
+  setSelectedChat,
+  setID,
+}: ChatListProps) {
   const { data: session, status } = useSession();
 
   const [convos, setConvos] = useState<Conversation[] | null>([]);
@@ -50,20 +54,25 @@ export default function ChatList({ selectedChat, setSelectedChat, setID }: ChatL
           <div
             key={convo.id}
             onClick={() => setData(convo.name, convo.id)}
-            className={convo.name === selectedChat ? " mb-2 cursor-pointer rounded-sm bg-blue-400 px-4 py-2 text-white  ":" mb-2 cursor-pointer rounded-sm bg-gray-600 px-4 py-2 dark:text-white text-black hover:bg-gray-400"}
+            className={
+              convo.name === selectedChat
+                ? " mb-2 cursor-pointer rounded-sm bg-blue-400 px-4 py-2 text-white  "
+                : " mb-2 cursor-pointer rounded-sm bg-gray-600 px-4 py-2 hover:bg-gray-400  dark:text-white"
+            }
           >
             {convo.name}
           </div>
         ))
       ) : (
-        <p ><text className ="content-center dark:text-white ">Loading...</text></p>
+        <p>
+          <text className="content-center dark:text-white ">Loading...</text>
+        </p>
       )}
     </div>
   );
 }
 
-/**********Description*************/
-/*
+/**********Description*************
 This React component, ChatList, is designed for navigating conversation 
 threads in the Extent application. It uses useSession from NextAuth for 
 session management. The component accepts chats, an array of chat objects, 
