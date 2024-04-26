@@ -24,9 +24,11 @@ export default function MessageInput({ handleSend, handleSubmit, setContent }: m
     }
   }
   const handleClick = () => {
+    if(val !== ''){
     handleSend(val);
     setVal('');
     setContent('');  // Clear external state
+    }
   };
 
   
