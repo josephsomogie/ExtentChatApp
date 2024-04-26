@@ -11,7 +11,7 @@ interface Chat {
 }
 
 interface ChatListProps {
-  chats: Chat[];
+  //chats: Chat[];
   selectedChat: string;
   setSelectedChat: (name: string) => void;
   setID: (convoId: string) => void;

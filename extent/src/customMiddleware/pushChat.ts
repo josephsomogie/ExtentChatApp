@@ -1,5 +1,8 @@
 
 export default async function pushChat(convoId: string, userId: string, content: string, username: string):Promise<void>{
+  if(typeof convoId !== 'string' || typeof userId !== 'string' || typeof content !== 'string' || typeof username !== 'string')  
+    {throw new Error('Invalid arguments provided to push chat method'); }
+
     try{
     const response = await fetch('/api/DBInteractions/newChat', {
         method: 'POST',

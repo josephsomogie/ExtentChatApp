@@ -1,4 +1,5 @@
 export default async function pullRequests(userId:string){
+    if(typeof userId !== 'string') throw new Error('User ID must be a string');
     const response = await fetch(`/api/DBInteractions/pendingFriends?userId=${encodeURIComponent(userId)}`,{
         method: 'GET',
         headers: {

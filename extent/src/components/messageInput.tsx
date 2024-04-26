@@ -5,11 +5,10 @@ interface messageInputFuncs {
   handleSubmit: (e: any) => any;
   handleSend: (e: any) => any;
   setContent: (e: any) => any;
-  setTyping: (t:boolean) => void;
 }
 //might run into issues with getting value, if so redesign this component
 export default function MessageInput({ handleSend, handleSubmit, setContent }: messageInputFuncs) {
-  const [val, setVal] = useState('');
+  const [val, setVal] = useState<string>('');
 
   const onChange = (e: any) => {
     const newValue = e.target.value;
@@ -21,11 +20,14 @@ export default function MessageInput({ handleSend, handleSubmit, setContent }: m
     
     if(e.key === 'Enter'){
       e.preventDefault();
-      handleSend(val)
-      setVal('');
+      handleClick();
     }
   }
- 
+  const handleClick = () => {
+    handleSend(val);
+    setVal('');
+    setContent('');  // Clear external state
+  };
 
   
   
@@ -44,7 +46,7 @@ export default function MessageInput({ handleSend, handleSubmit, setContent }: m
         <button
           //type="submit" //button triggers form submission
           className="ml-2 rounded-lg bg-cyan-600 px-4 shadow-sm"
-          onClick={()=> {handleSend(val); setVal('');}} 
+          onClick={handleClick} 
         >
           <SendHorizontal style={{color:'white'}}/>
         </button>

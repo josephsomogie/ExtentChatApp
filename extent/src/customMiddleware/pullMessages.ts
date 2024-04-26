@@ -1,4 +1,5 @@
 export default async function pullMessages(convoId: string){
+    if(typeof convoId !== 'string') throw new Error('conversation ID must be a string');
     const response = await fetch(`/api/DBInteractions/fetchMessages?convoId=${encodeURIComponent(convoId)}`,{
         method: 'GET',
         headers: {

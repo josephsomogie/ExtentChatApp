@@ -1,5 +1,6 @@
 
 export default async function pullConversations(userId: string){
+    if(typeof userId !== 'string') throw new Error('User ID must be a string');
     const response = await fetch(`/api/DBInteractions/fetchConversations?userId=${encodeURIComponent(userId)}`,{
     method: 'GET',
     headers: {
