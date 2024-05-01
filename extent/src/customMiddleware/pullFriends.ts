@@ -1,7 +1,7 @@
-export default async function pullRequests(userId: string) {
-  if (typeof userId !== "string") throw new Error("User ID must be a string");
+export default async function pullFriends(userId: string) {
+  if (typeof userId !== "string") {throw new Error("User ID must be a string");}
   const response = await fetch(
-    `/api/DBInteractions/pendingFriends?userId=${encodeURIComponent(userId)}`,
+    `/api/DBInteractions/fetchFriends?userId=${encodeURIComponent(userId)}`,
     {
       method: "GET",
       headers: {
@@ -15,6 +15,6 @@ export default async function pullRequests(userId: string) {
 
     return data;
   } else {
-    console.log("error pulling friend requests");
+    console.log("error pulling friends");
   }
 }

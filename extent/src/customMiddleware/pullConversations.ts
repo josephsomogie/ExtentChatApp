@@ -1,17 +1,20 @@
-
-export default async function pullConversations(userId: string){
-    if(typeof userId !== 'string') throw new Error('User ID must be a string');
-    const response = await fetch(`/api/DBInteractions/fetchConversations?userId=${encodeURIComponent(userId)}`,{
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
+export default async function pullConversations(userId: string) {
+  if (typeof userId !== "string") throw new Error("User ID must be a string");
+  const response = await fetch(
+    `/api/DBInteractions/fetchConversations?userId=${encodeURIComponent(userId)}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-
-})
-if(response.ok){
+  );
+  if (response.ok) {
     const data = await response.json();
-    console.log("data: "+data);
-    
+    console.log("data: " + data);
+
     return data;
-}else{console.log("error pulling conversations")}
+  } else {
+    console.log("error pulling conversations");
+  }
 }
